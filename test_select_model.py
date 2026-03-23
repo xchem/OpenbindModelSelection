@@ -1,4 +1,4 @@
-from select_model import Pipeline, select_model
+from src.openbind_model_selection.select_model import Pipeline, select_model
 
 from pathlib import Path
 import re
@@ -40,7 +40,7 @@ if __name__ == "__main__":
             )
 
     rprint(sts)
-    
+
     select_model(
         sts
     )
