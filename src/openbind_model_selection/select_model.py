@@ -74,7 +74,7 @@ def select_model(sts: list[StructureModel]) -> StructureModel | None:
     # Consider only structures with built ligands
     sts_with_ligands = {
         {
-            pipeline: {x['path']: x for x in sts if (x['pipeline'] == pipeline) & (has_ligand(x['path']))}
+            pipeline: {x['path']: x for x in sts if (x['pipeline'] == pipeline) & (has_ligand(x))}
             for pipeline in Pipeline}
     }
 
