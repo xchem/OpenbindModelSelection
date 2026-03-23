@@ -1,4 +1,4 @@
-from src.openbind_model_selection.select_model import Pipeline, select_model
+from src.openbind_model_selection.select_model import Pipeline, select_model, Constants
 
 from pathlib import Path
 import re
@@ -34,7 +34,7 @@ if __name__ == "__main__":
                     'pipeline': Pipeline.Pipedream,
                     'pipeline_info': {
                         'pipedream_path': pipedream_dir,
-                        'rhofit_dir': pipedream_dataset_dir / f'rhofit-{re.match(r'postrefine-([/S]+)', st_model_dir.name)}'
+                        'rhofit_dir': pipedream_dataset_dir / f'rhofit-{re.match(Constants.POSTREFINE_LIG_CODE_REGEX, st_model_dir.name)}'
                     }
                 }
             )

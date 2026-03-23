@@ -36,6 +36,7 @@ class Constants:
     PANDDA_ANALYZE_EVENTS = 'panddas/analyses/pandda_analyse_events.csv'
     PANDDA_ANALYZE_EVENT_SCORE = 'z_mean'
     LIG_NAMES = ('LIG', 'XXX')
+    POSTREFINE_LIG_CODE_REGEX = r'postrefine-([/S]+)'
 
 
 def has_ligand(st: StructureModel) -> bool:
