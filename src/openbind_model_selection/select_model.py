@@ -79,7 +79,7 @@ def select_model(sts: list[StructureModel]) -> StructureModel | None:
         
     }
 
-    if Pipeline.PanDDA2 in sts_with_ligands & Pipeline.Pipedream in sts_with_ligands:
+    if (Pipeline.PanDDA2 in sts_with_ligands) & (Pipeline.Pipedream in sts_with_ligands):
 
         # If there are pipedream options, use the one with the best RSCC
         if len(sts_with_ligands[Pipeline.Pipedream]) > 0:
