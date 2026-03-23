@@ -7,7 +7,7 @@ from rich import print as rprint
 if __name__ == "__main__":
     path = Path('/dls/labxchem/data/lb42888/lb42888-6/processed/analysis/')
     dtag = 'Zika_NS5A-x5769'
-    pandda_dir = path / 'pandda_2'
+    pandda_dir = path / 'pandda2' / 'panddas'
     pandda_dataset_dir = pandda_dir / 'processed_datasets' / dtag
     sts = []
 
