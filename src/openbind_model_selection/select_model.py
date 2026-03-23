@@ -57,8 +57,6 @@ def get_rscc_rhofit(st: StructureModel) -> float:
     with open(Path(st['pipeline_info']['rhofit_dir']) / Constants.RHOFIT_HIT_LOG, 'r') as f:
         data = f.read()
     matches = re.findall(r'^[\S]+\s+([\S]+)', data)
-    rprint(matches)
-
     return max([float(match) for match in matches])
 
 def get_pandda_score(st: StructureModel) -> float:
@@ -86,13 +84,11 @@ def select_model(sts: list[StructureModel]) -> StructureModel | None:
         # If there are pipedream options, use the one with the best RSCC
         if len(sts_with_ligands[Pipeline.Pipedream]) > 0:
             rsccs = {path: get_rscc_rhofit(st) for path, st in sts_with_ligands[Pipeline.Pipedream].items()}
-            rprint(rsccs)
             return sts_with_ligands[Pipeline.Pipedream][max(rsccs, key=lambda _path: rsccs[_path])]
 
         # Otherwise if there is a PanDDA option, use the one with the highest event score
         elif len(sts_with_ligands[Pipeline.PanDDA2]) > 0:
             scores = {path: get_pandda_score(st) for path, st in sts_with_ligands[Pipeline.PanDDA2].items()}
-            rprint(scores)
             return sts_with_ligands[Pipeline.PanDDA2][max(scores, key=lambda _path: scores[_path])]
 
         # If there are no options return None
