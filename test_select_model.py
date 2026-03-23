@@ -14,7 +14,7 @@ if __name__ == "__main__":
     # Get the PanDDA 2 results
     sts.append(
             {
-                'path': pandda_dataset_dir,
+                'path': pandda_dataset_dir / 'modelled_structures' / f'{dtag}-pandda-model.pdb',
                 'pipeline': Pipeline.PanDDA2,
                 'pipeline_info': {
                     'pandda_path': pandda_dir,
