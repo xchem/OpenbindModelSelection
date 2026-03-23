@@ -56,7 +56,8 @@ def get_rscc_rhofit(st: StructureModel) -> float:
     # Actually gets the best RSCC of any fit, not -strictly- the one rhofit chose
     with open(Path(st['pipeline_info']['rhofit_dir']) / Constants.RHOFIT_HIT_LOG, 'r') as f:
         data = f.read()
-    matches = re.findall(r'^[\S]\s([\S]+)', data)
+    matches = re.findall(r'^[\S]+\s+([\S]+)', data)
+    rprint(matches)
 
     return max([float(match) for match in matches])
 
