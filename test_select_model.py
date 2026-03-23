@@ -37,7 +37,7 @@ if __name__ == "__main__":
                     'pipeline': Pipeline.Pipedream,
                     'pipeline_info': {
                         'pipedream_path': pipedream_dir,
-                        'rhofit_dir': pipedream_dataset_dir / f'rhofit-{re.match(Constants.POSTREFINE_LIG_CODE_REGEX, st_model_dir.name)[0]}'
+                        'rhofit_dir': pipedream_dataset_dir / f'rhofit-{re.match(Constants.POSTREFINE_LIG_CODE_REGEX, st_model_dir.name)[1]}'
                     }
                 }
             )
