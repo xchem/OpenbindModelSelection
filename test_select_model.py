@@ -28,6 +28,8 @@ if __name__ == "__main__":
     pipedream_dataset_dir = pipedream_dir / dtag
     for st_model_dir in pipedream_dataset_dir.glob('postrefine*'):
         if st_model_dir.is_dir():
+            match = re.match(Constants.POSTREFINE_LIG_CODE_REGEX, st_model_dir.name)
+            rprint(match)
             sts.append(
                 {
                     'path': st_model_dir / 'refine.pdb',
