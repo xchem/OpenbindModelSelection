@@ -30,7 +30,7 @@ if __name__ == "__main__":
         if st_model_dir.is_dir():
             match = re.match(Constants.POSTREFINE_LIG_CODE_REGEX, st_model_dir.name)
             rprint(st_model_dir.name)
-            rprint(match)
+            rprint(match[0])
             sts.append(
                 {
                     'path': st_model_dir / 'refine.pdb',
