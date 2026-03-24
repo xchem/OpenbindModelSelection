@@ -69,7 +69,10 @@ def get_pandda_score(st: StructureModel) -> float:
 
 def select_model(sts: list[StructureModel]) -> StructureModel | None:
     """
-    Given a list of models, produced by various pipelines, select which to continue
+    Given a list of models, produced by various pipelines, select which to continue.
+
+    This is not intended to guarantee a good model is continued, just the best of available ones.
+    Review will still be needed!
     """
     # Consider only structures with built ligands
     sts_with_ligands = {
@@ -81,19 +84,19 @@ def select_model(sts: list[StructureModel]) -> StructureModel | None:
 
     if (Pipeline.PanDDA2 in sts_with_ligands) & (Pipeline.Pipedream in sts_with_ligands):
 
-        # If there are pipedream options, use the one with the best RSCC
+        # If there are pipedream options, use the one with the best RSCC if it is > 0.7
         if len(sts_with_ligands[Pipeline.Pipedream]) > 0:
             rsccs = {path: get_rscc_rhofit(st) for path, st in sts_with_ligands[Pipeline.Pipedream].items()}
-            return sts_with_ligands[Pipeline.Pipedream][max(rsccs, key=lambda _path: rsccs[_path])]
+            if any([x > 0.7 for x in rsccs.values()]):
+                return sts_with_ligands[Pipeline.Pipedream][max(rsccs, key=lambda _path: rsccs[_path])]
 
         # Otherwise if there is a PanDDA option, use the one with the highest event score
-        elif len(sts_with_ligands[Pipeline.PanDDA2]) > 0:
+        if len(sts_with_ligands[Pipeline.PanDDA2]) > 0:
             scores = {path: get_pandda_score(st) for path, st in sts_with_ligands[Pipeline.PanDDA2].items()}
             return sts_with_ligands[Pipeline.PanDDA2][max(scores, key=lambda _path: scores[_path])]
 
         # If there are no options return None
-        else:
-            return None
+        return None
         
     elif Pipeline.Pipedream in sts_with_ligands:
         # Select pipedream with best RSCC
